@@ -1,14 +1,15 @@
 import React from 'react'
 import App, { Container } from 'next/app'
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
+import styled, { ThemeProvider, injectGlobal } from 'styled-components'
 
 // Utils
 import theme from '../utils/theme'
 
 // Locals
 import Nav from '../components/Nav'
+import { MainContainer } from '../components/shared/Containers'
 
-const GlobalStyle = createGlobalStyle`
+injectGlobal`
   html,
   body {
     margin: 0;
@@ -20,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
       -webkit-font-smoothing: antialiased;
     }
   }
+
   *,
   *:after,
   *:before {
@@ -44,15 +46,16 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props
 
     return (
-      <Container>
+      <MainContainer>
         <ThemeProvider theme={theme}>
           <>
-            <Nav />
-            <Component {...pageProps} />
-            <GlobalStyle />
+            <Container>
+              <Nav />
+              <Component {...pageProps} />
+            </Container>
           </>
         </ThemeProvider>
-      </Container>
+      </MainContainer>
     )
   }
 }
