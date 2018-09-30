@@ -8,7 +8,8 @@
     "next": "7.0.0",
     "react": "16.5.2",
     "react-dom": "16.5.2",
-    "styled-components": "3.4.9"
+    "styled-components": "3.4.9",
+    "styled-media-query": "2.0.2"
   },
   "prettier": {
     "semi": false,
