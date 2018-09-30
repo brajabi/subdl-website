@@ -1,4 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+// Utils
+import { mobile } from '../../utils/media'
 
 export const MainContainer = styled.div`
   height: 100%;
