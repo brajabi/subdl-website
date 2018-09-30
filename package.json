@@ -8,7 +8,7 @@
     "next": "7.0.0",
     "react": "16.5.2",
     "react-dom": "16.5.2",
-    "styled-components": "4.0.0-beta.9"
+    "styled-components": "3.4.9"
   },
   "prettier": {
     "semi": false,
@@ -16,6 +16,7 @@
     "trailingComma": "all"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "1.8.0",
     "prettier": "1.14.3"
   }
 }
