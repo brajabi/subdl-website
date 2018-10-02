@@ -9,9 +9,10 @@ export const BackgroundImage = styled.div`
 
   position: absolute;
   width: 45%;
-  height: 100%;
+  height: auto;
   right: 0;
   top: 55px;
+  bottom: 0;
 
   ${mobile(css`
     width: 55%;
