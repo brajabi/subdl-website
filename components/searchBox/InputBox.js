@@ -6,17 +6,19 @@ import { mobile } from '../../utils/media'
 // Locals
 import SearchIcon from '../shared/SearchIcon'
 
-const InputBox = () => (
-  <Container>
+const InputBox = ({ fullWidth = null }) => (
+  <Container fullWidth={fullWidth}>
     <Input
       type="text"
       name="search"
       placeholder="Search for movies, TV series, films, etc"
       autoComplete="off"
     />
-    <SearchButton>Search</SearchButton>
-    <SearchButton mobile>
-      <SearchIcon />
+    <SearchButton type="submit">
+      <ButtenText id="search">Search</ButtenText>
+      <ButtonIcon aria-labelledby="search">
+        <SearchIcon />
+      </ButtonIcon>
     </SearchButton>
   </Container>
 )
@@ -27,7 +29,11 @@ export default InputBox
 const Container = styled.div`
   display: flex;
 
-  max-width: 572px;
+  ${p =>
+    !p.fullWidth &&
+    css`
+      max-width: 572px;
+    `};
   height: 50px;
 
   background: #ffffff;
@@ -51,7 +57,7 @@ const Input = styled.input`
   `)};
 `
 
-const SearchButton = styled.div`
+const SearchButton = styled.button`
   display: block;
   height: 36px;
   margin: 7px 9px;
@@ -66,27 +72,25 @@ const SearchButton = styled.div`
   text-align: center;
   line-height: 2.5;
   background: #ffea52;
+  border: none;
+  outline: none;
+`
 
-  ${p =>
-    p.mobile &&
+const ButtenText = styled.span`
+  ${mobile(
     css`
       display: none;
-    `};
+    `,
+  )};
+`
 
-  ${p =>
-    p.mobile &&
-    mobile(
-      css`
-        display: block;
-        line-height: 3.1;
-      `,
-    )};
+const ButtonIcon = styled.span`
+  display: none;
+  padding-top: 5px;
 
-  ${p =>
-    !p.mobile &&
-    mobile(
-      css`
-        display: none;
-      `,
-    )};
+  ${mobile(
+    css`
+      display: block;
+    `,
+  )};
 `
