@@ -10,5 +10,5 @@ export default {
   normal15: '15px',
   normal: '14px',
   small: '13px',
-  smaller: '11px',
+  smaller: '12px',
 }
