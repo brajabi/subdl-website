@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components'
 import Logo from './shared/Logo'
 import { mobile } from '../utils/media'
 
-const Nav = () => (
-  <HeaderContainer>
+const Nav = ({ secondMode }) => (
+  <HeaderContainer secondMode={secondMode}>
     <LogoContainer>
       <Logo />
     </LogoContainer>
@@ -27,6 +27,14 @@ export default Nav
 
 const HeaderContainer = styled.header`
   display: flex;
+
+  ${p =>
+    p.secondMode &&
+    css`
+      a {
+        color: #fff;
+      }
+    `};
 `
 
 const LogoContainer = styled.div``
@@ -47,16 +55,6 @@ const StyledNav = styled.nav`
   `)};
 `
 
-const RightNav = styled.div`
-  display: flex;
-  align-items: flex-end;
-  padding-bottom: 10px;
-
-  ${mobile(css`
-    display: none;
-  `)};
-`
-
 const NavItems = styled.a`
   margin-right: 15px;
   text-decoration: none;
@@ -65,6 +63,20 @@ const NavItems = styled.a`
   font-family: ${p => p.theme.mainFont};
   font-size: 14px;
   letter-spacing: 0.1em;
+`
+
+const RightNav = styled.div`
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+
+  ${mobile(css`
+    display: none;
+  `)};
+
+  a:last-child {
+    margin-right: 0;
+  }
 `
 
 const BetweenText = styled.div`
