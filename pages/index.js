@@ -4,26 +4,30 @@ import styled, { css } from 'styled-components'
 import { mobile } from '../utils/media'
 
 // Locals
+import Header from '../components/Header'
+import { Wrapper } from '../components/shared/Containers'
 import SearchBox from '../components/searchBox/SearchBox'
 import { BackgroundImage } from '../components/BackgroundImage'
 
 const Index = () => {
   return (
-    <Wrapper>
-      <ContentWrapper>
-        <MainTitle>
-          <strong>Find perfect subtitles</strong> in any language for any movie!
-        </MainTitle>
-        <SearchBox />
-      </ContentWrapper>
-      <BackgroundImage />
-    </Wrapper>
+    <>
+      <Header />
+      <Wrapper>
+        <ContentWrapper>
+          <MainTitle>
+            <strong>Find perfect subtitles</strong> in any language for any
+            movie!
+          </MainTitle>
+          <SearchBox />
+        </ContentWrapper>
+        <BackgroundImage />
+      </Wrapper>
+    </>
   )
 }
 
 export default Index
-
-const Wrapper = styled.div``
 
 const ContentWrapper = styled.div`
   max-width: 560px;
