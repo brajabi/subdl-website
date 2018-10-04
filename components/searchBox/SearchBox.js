@@ -1,10 +1,12 @@
 import InputBox from './InputBox'
 import Trends from './Trends'
+import ChooseLanguage from './ChooseLanguage'
 
-const SearchBox = () => (
+const SearchBox = ({ fullWidth }) => (
   <>
-    <InputBox />
-    <Trends />
+    <InputBox fullWidth={fullWidth} />
+
+    {fullWidth ? <ChooseLanguage /> : <Trends />}
   </>
 )
 export default SearchBox
