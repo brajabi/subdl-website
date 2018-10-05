@@ -6,8 +6,8 @@ import { mobile } from '../../utils/media'
 // Locals
 import SearchIcon from '../shared/SearchIcon'
 
-const InputBox = ({ fullWidth = null }) => (
-  <Container fullWidth={fullWidth}>
+const InputBox = ({ mode }) => (
+  <Container mode={mode}>
     <Input
       type="text"
       name="search"
@@ -29,16 +29,19 @@ export default InputBox
 const Container = styled.div`
   display: flex;
 
-  ${p =>
-    !p.fullWidth &&
-    css`
-      max-width: 572px;
-    `};
-  height: 50px;
+  max-width: ${p => (!p.mode ? '572px' : '650px')};
+  /* height: 50px;/ */
+  height: ${p => (!p.mode ? '50px' : p.mode == 'movie' ? '40px' : '40px')};
 
   background: #ffffff;
   border: 1px solid #d7d7d7;
   box-sizing: border-box;
+
+  /* TEST */
+  border: 1px solid #e3e3e3;
+
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
 `
 
 const Input = styled.input`
@@ -49,7 +52,7 @@ const Input = styled.input`
   border: none;
 
   font-family: ${p => p.theme.mainFont};
-  font-size: ${p => p.theme.meduim};
+  font-size: ${p => p.theme.medium};
   color: #969696;
 
   ${mobile(css`
@@ -58,10 +61,13 @@ const Input = styled.input`
 `
 
 const SearchButton = styled.button`
+  display: flex;
+  align-items: center;
+
   display: block;
-  height: 36px;
+  max-height: 36px;
   margin: 7px 9px;
-  padding: 0 8px;
+  /* padding: 0 8px; */
 
   font-family: ${p => p.theme.mainFont};
   font-size: ${p => p.theme.normal};
@@ -70,7 +76,6 @@ const SearchButton = styled.button`
   cursor: pointer;
   color: #000000;
   text-align: center;
-  line-height: 2.5;
   background: #ffea52;
   border: none;
   outline: none;
@@ -86,7 +91,6 @@ const ButtenText = styled.span`
 
 const ButtonIcon = styled.span`
   display: none;
-  padding-top: 5px;
 
   ${mobile(
     css`

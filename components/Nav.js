@@ -5,21 +5,27 @@ import styled, { css } from 'styled-components'
 import Logo from './shared/Logo'
 import { mobile } from '../utils/media'
 
-const Nav = ({ secondMode }) => (
-  <HeaderContainer secondMode={secondMode}>
-    <LogoContainer>
+const Nav = ({ mode, children }) => (
+  <HeaderContainer mode={mode}>
+    <LogoContainer href="/">
       <Logo />
     </LogoContainer>
-    <StyledNav>
+
+    {children && <ChildWrapper>{children}</ChildWrapper>}
+
+    <StyledNav mode={mode}>
       <NavItems href="#">discover</NavItems>
       <NavItems href="#">popular</NavItems>
       <NavItems href="#">latest movies</NavItems>
     </StyledNav>
-    <RightNav>
-      <NavItems href="#">login</NavItems>
-      <BetweenText>or</BetweenText>
-      <NavItems href="#">signup</NavItems>
-    </RightNav>
+
+    {!children && (
+      <RightNav>
+        <NavItems href="#">login</NavItems>
+        <BetweenText>or</BetweenText>
+        <NavItems href="#">signup</NavItems>
+      </RightNav>
+    )}
   </HeaderContainer>
 )
 
@@ -27,18 +33,24 @@ export default Nav
 
 const HeaderContainer = styled.header`
   display: flex;
+  align-items: flex-end;
 
   ${p =>
     p.secondMode &&
     css`
       a {
-        color: #fff;
+        color: #6a6a6a;
       }
     `};
 `
 
-const LogoContainer = styled.div``
+const LogoContainer = styled.a``
 
+const ChildWrapper = styled.nav`
+  flex-grow: 1;
+
+  padding-left: 30px;
+`
 const StyledNav = styled.nav`
   flex-grow: 1;
 
@@ -47,6 +59,12 @@ const StyledNav = styled.nav`
   padding: 0 0 10px 30px;
   flex-wrap: wrap;
   overflow: hidden;
+
+  ${p =>
+    p.mode == 'movie' &&
+    css`
+      justify-content: flex-end;
+    `};
 
   ${mobile(css`
     a:nth-child(3) {
