@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
   cursor: pointer;
   path {
-    fill: #fff;
+    fill: #6a6a6a;
   }
 `
 
@@ -35,5 +35,5 @@ const Title = styled.span`
   font-style: italic;
   font-weight: 300;
 
-  color: #fff;
+  color: #6a6a6a;
 `
