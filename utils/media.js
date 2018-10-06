@@ -27,6 +27,12 @@ export const desktop = body => css`
   }
 `
 
+export const largeDescktop = body => css`
+  @media (min-width: 1400px) {
+    ${body};
+  }
+`
+
 export const retina = body => css`
   @media only screen and (-webkit-min-device-pixel-ratio: 1.25),
     only screen and (min--moz-device-pixel-ratio: 1.25),
