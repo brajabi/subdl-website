@@ -1,12 +1,12 @@
 import React from 'react'
 import App, { Container } from 'next/app'
-import styled, { ThemeProvider, injectGlobal } from 'styled-components'
+import { ThemeProvider, injectGlobal } from 'styled-components'
 
 // Utils
 import theme from '../utils/theme'
 
 // Locals
-import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import { MainContainer } from '../components/shared/Containers'
 
 injectGlobal`
@@ -43,15 +43,19 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const {
+      Component,
+      pageProps,
+      router: { route },
+    } = this.props
 
     return (
       <MainContainer>
         <ThemeProvider theme={theme}>
           <>
             <Container>
-              <Nav />
               <Component {...pageProps} />
+              <Footer />
             </Container>
           </>
         </ThemeProvider>
