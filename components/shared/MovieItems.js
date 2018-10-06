@@ -46,24 +46,17 @@ export const MovieRow = ({ title, year, subtitleCount }) => (
 )
 
 // Style
-const RowWrapper = styled.div`
-  width: 100%;
-  margin-bottom: 15px;
-
-  display: flex;
-  ${p =>
-    p.column &&
-    css`
-      flex-direction: column;
-    `};
-`
 
 const Poster = styled.div`
-  width: 53px;
-  height: 80px;
+  width: 60px;
+  height: 90px;
 
-  border-radius: 3px;
   overflow: hidden;
+  border-radius: 3px;
+  transition: box-shadow 200ms, transform 200ms, opacity 200ms;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  opacity: 0.9;
+  transform: scale(1, 1);
 
   img {
     width: 100%;
@@ -71,7 +64,7 @@ const Poster = styled.div`
 `
 
 const MovieLink = styled.a`
-  display: block;
+  display: inline-block;
 
   text-decoration: none;
   color: inherit;
@@ -90,17 +83,22 @@ const MovieDetails = styled.div`
 
 const MovieTitle = styled.h2`
   font-family: ${p => p.theme.mainFont};
+  font-size: ${p => p.theme.normal15};
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   margin: 0;
 
   color: #10141d;
-  font-size: ${p => (p.biggerFontSize ? p.theme.meduim : p.theme.normal15)};
-  font-weight: ${p => (p.biggerFontSize ? 500 : 400)};
+
+  :hover {
+    color: #050a13;
+  }
 `
 const Year = styled.span`
   font-size: ${p => p.theme.normal};
+  color: #545454;
+
   ::before {
     content: ' ';
   }
@@ -125,5 +123,24 @@ const Subtitle = styled.span`
 
   ::before {
     content: ' ';
+  }
+`
+
+const RowWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 18px;
+  /* padding-left: 15px; */
+
+  display: flex;
+  ${p =>
+    p.column &&
+    css`
+      flex-direction: column;
+    `};
+
+  :hover ${Poster} {
+    opacity: 1;
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.6);
   }
 `
