@@ -34,6 +34,7 @@ export default Nav
 const HeaderContainer = styled.header`
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
 
   ${p =>
     p.secondMode &&
@@ -44,12 +45,18 @@ const HeaderContainer = styled.header`
     `};
 `
 
-const LogoContainer = styled.a``
+const LogoContainer = styled.a`
+  height: 65px;
+`
 
 const ChildWrapper = styled.nav`
   flex-grow: 1;
 
   padding-left: 30px;
+  ${mobile(css`
+    padding-left: 0;
+    padding-top: 10px;
+  `)};
 `
 const StyledNav = styled.nav`
   flex-grow: 1;
@@ -66,11 +73,16 @@ const StyledNav = styled.nav`
       justify-content: flex-end;
     `};
 
-  ${mobile(css`
-    a:nth-child(3) {
-      display: none;
-    }
-  `)};
+  ${p =>
+    p.mode == 'movie'
+      ? mobile(css`
+          display: none;
+        `)
+      : mobile(css`
+          a:nth-child(3) {
+            display: none;
+          }
+        `)};
 `
 
 const NavItems = styled.a`
