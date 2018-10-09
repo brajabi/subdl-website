@@ -13,6 +13,7 @@ const InputBox = ({ mode }) => (
       name="search"
       placeholder="Search for movies, TV series, films, etc"
       autoComplete="off"
+      mode={mode}
     />
     <SearchButton type="submit">
       <ButtenText id="search">Search</ButtenText>
@@ -30,16 +31,15 @@ const Container = styled.div`
   display: flex;
 
   max-width: ${p => (!p.mode ? '572px' : '650px')};
-  /* height: 50px;/ */
   height: ${p => (!p.mode ? '50px' : p.mode == 'movie' ? '40px' : '40px')};
+  margin: 2px;
 
   background: #ffffff;
   border: 1px solid #d7d7d7;
   box-sizing: border-box;
 
   /* TEST */
-  border: 1px solid #e3e3e3;
-
+  /* border: 1px solid #e3e3e3; */
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 `
@@ -52,7 +52,7 @@ const Input = styled.input`
   border: none;
 
   font-family: ${p => p.theme.mainFont};
-  font-size: ${p => p.theme.medium};
+  font-size: ${p => (p.mode != 'movie' ? p.theme.medium : p.theme.normal15)};
   color: #969696;
 
   ${mobile(css`
