@@ -11,7 +11,7 @@ export const MainContainer = styled.div`
 `
 
 export const Wrapper = styled.div`
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0 35px;
 `
 
