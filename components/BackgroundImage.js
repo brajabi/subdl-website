@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { mobile } from '../utils/media'
 
 export const BackgroundImage = styled.div`
-  background: url('../static/mainBackgrounds/logan.png');
+  background: url('../static/mainBackgrounds/logan-large.jpg');
   background-size: cover;
 
   position: absolute;
