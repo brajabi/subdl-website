@@ -5,6 +5,7 @@ import { mobile } from '../../utils/media'
 
 // Locals
 import SearchIcon from '../shared/SearchIcon'
+import AutoComplete from './AutoComplete'
 
 const InputBox = ({ mode }) => (
   <Container mode={mode}>
@@ -21,6 +22,7 @@ const InputBox = ({ mode }) => (
         <SearchIcon />
       </ButtonIcon>
     </SearchButton>
+    <AutoComplete />
   </Container>
 )
 
@@ -29,6 +31,7 @@ export default InputBox
 // Styles
 const Container = styled.div`
   display: flex;
+  position: relative;
 
   max-width: ${p => (!p.mode ? '572px' : '650px')};
   height: ${p => (!p.mode ? '50px' : p.mode == 'movie' ? '40px' : '40px')};
