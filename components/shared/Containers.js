@@ -6,7 +6,7 @@ import { largeDescktop } from '../../utils/media'
 export const MainContainer = styled.div`
   height: 100%;
   margin: 0px auto;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding-bottom: 30px;
 `
 
