@@ -1,40 +1,16 @@
 import styled, { css } from 'styled-components'
 
-const AutoComplete = () => (
+const AutoComplete = ({ movieList }) => (
   <Container>
-    <MovieItem>
-      <Poster src="https://subdl.com/p/sd2/sd2922.jpg" />
-      <Title>
-        Black Panther (2017)
-        <MovieKind>Movie</MovieKind>
-      </Title>
-    </MovieItem>
-    <MovieItem>
-      <Poster src="https://subdl.com/p/sd2/sd2922.jpg" />
-      <Title>
-        Black Panther (2017)
-        <MovieKind>Movie</MovieKind>
-      </Title>
-    </MovieItem>
-    <MovieItem>
-      <Poster src="https://subdl.com/p/sd2/sd2922.jpg" />
-      <Title>
-        Black Panther (2017)
-        <MovieKind>Movie</MovieKind>
-      </Title>
-    </MovieItem>
-    <MovieItem inline>
-      <Title>
-        <span>Black Panther (2017)</span>
-        <MovieKind>Movie</MovieKind>
-      </Title>
-    </MovieItem>
-    <MovieItem inline>
-      <Title>
-        <span>Black Panther (2017)</span>
-        <MovieKind>Movie</MovieKind>
-      </Title>
-    </MovieItem>
+    {movieList.map(movieData => (
+      <MovieItem>
+        <Poster src={movieData.orginal_poster} />
+        <Title>
+          {movieData.name} ({movieData.year})
+          <MovieKind>{movieData.type}</MovieKind>
+        </Title>
+      </MovieItem>
+    ))}
   </Container>
 )
 
