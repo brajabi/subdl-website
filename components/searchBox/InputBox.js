@@ -1,4 +1,6 @@
+import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
+import axios from 'axios'
 
 // Utils
 import { mobile } from '../../utils/media'
@@ -7,27 +9,73 @@ import { mobile } from '../../utils/media'
 import SearchIcon from '../shared/SearchIcon'
 import AutoComplete from './AutoComplete'
 
+class InputBox extends Component {
+  state = {
+    autoCompleteRequest: false,
+    inputValue: '',
+    sourceRequest: null,
+    movieList: {},
+  }
 
+  componentDidMount = () => {}
 
+  getAutoCompleteList = query => {
+    if (this.state.sourceRequest)
+      this.state.sourceRequest.cancel('Operation canceled by the user.')
 
-const InputBox = ({ mode }) => (
-  <Container mode={mode}>
-    <Input
-      type="text"
-      name="search"
-      placeholder="Search for movies, TV series, films, etc"
-      autoComplete="off"
-      mode={mode}
-    />
-    <SearchButton type="submit">
-      <ButtenText id="search">Search</ButtenText>
-      <ButtonIcon aria-labelledby="search">
-        <SearchIcon />
-      </ButtonIcon>
-    </SearchButton>
-    <AutoComplete />
-  </Container>
-)
+    const CancelToken = axios.CancelToken
+    const source = CancelToken.source()
+    this.setState({ sourceRequest: source })
+
+    axios
+      .get(`https://api.subdl.com/v1/autoComplete/${encodeURI(query)}`, {
+        cancelToken: source.token,
+      })
+      .then(res => {
+        console.log(res.data.results)
+        this.setState({
+          movieList: res.data.results.slice(0, 5),
+          autoCompleteRequest: true,
+        })
+      })
+  }
+
+  inputOnChanged = event => {
+    const newValue = event.currentTarget.value
+    this.setState({ inputValue: newValue })
+
+    if (newValue.length >= 3) {
+      this.getAutoCompleteList(newValue)
+    }
+  }
+
+  render = () => {
+    const { mode } = this.props
+
+    return (
+      <Container mode={mode}>
+        <Input
+          type="text"
+          name="search"
+          placeholder="Search for movies, TV series, films, etc"
+          autoComplete="off"
+          mode={mode}
+          value={this.state.inputValue}
+          onChange={this.inputOnChanged}
+        />
+        <SearchButton type="submit">
+          <ButtenText id="search">Search</ButtenText>
+          <ButtonIcon aria-labelledby="search">
+            <SearchIcon />
+          </ButtonIcon>
+        </SearchButton>
+        {this.state.autoCompleteRequest && (
+          <AutoComplete movieList={this.state.movieList} />
+        )}
+      </Container>
+    )
+  }
+}
 
 export default InputBox
 
