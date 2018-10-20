@@ -1,8 +1,59 @@
+import React, { Component } from 'react'
+import Downshift from 'downshift'
 import styled, { css } from 'styled-components'
 
-const AutoComplete = ({ movieList }) => (
-  <Container>
-    {movieList.map(movieData => (
+class AutoComplete extends Component {
+  render = () => {
+    const { movieList } = this.props
+    console.log(movieList)
+    return (
+      <Downshift
+        onChange={selection => alert(`You selected ${selection.name}`)}
+        itemToString={item => (item ? item.name : '')}
+      >
+        {({
+          getRootProps,
+          getInputProps,
+          getItemProps,
+          getLabelProps,
+          getMenuProps,
+          isOpen,
+          inputValue,
+          highlightedIndex,
+          selectedItem,
+        }) => (
+          <Container {...getRootProps({ refKey: 'innerRef' })}>
+            {isOpen &&
+              movieList
+                .filter(item => !inputValue || item.name.includes(inputValue))
+                .map((item, index) => (
+                  <MovieItem
+                    {...getItemProps({
+                      key: item.name,
+                      index,
+                      item,
+                      style: {
+                        backgroundColor:
+                          highlightedIndex === index ? 'lightgray' : 'white',
+                        fontWeight: selectedItem === item ? 'bold' : 'normal',
+                      },
+                    })}
+                  >
+                    <Poster src={item.orginal_poster} />
+                    <Title>
+                      {item.name} ({item.year})
+                      <MovieKind>{item.type}</MovieKind>
+                    </Title>
+                  </MovieItem>
+                ))}
+          </Container>
+        )}
+      </Downshift>
+    )
+  }
+}
+
+/* {movieList.map(movieData => (
       <MovieItem>
         <Poster src={movieData.orginal_poster} />
         <Title>
@@ -10,10 +61,7 @@ const AutoComplete = ({ movieList }) => (
           <MovieKind>{movieData.type}</MovieKind>
         </Title>
       </MovieItem>
-    ))}
-  </Container>
-)
-
+    ))} */
 export default AutoComplete
 
 // Style
